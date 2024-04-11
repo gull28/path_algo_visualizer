@@ -1,0 +1,12 @@
+{
+  "name": "path_algo_visualizer",
+  "version": "1.0.0",
+  "description": "Welcome to the Path Finding Algorithm Visualizer! This project is a refreshing break from the complexities of big serious web apps, created with bare-bones JavaScript.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm index.html"
+  },
+  "author": "",
+  "license": "ISC"
+}

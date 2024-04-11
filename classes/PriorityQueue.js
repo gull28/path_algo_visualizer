@@ -19,8 +19,10 @@ class PriorityQueue {
     }
     const root = this.heap[0];
     this.heap[0] = this.heap[this.length - 1];
+    this.heap.pop();
     this.length -= 1;
     this.sinkDown(0);
+
     return root;
   }
 
@@ -62,9 +64,10 @@ class PriorityQueue {
         break;
       }
       // Rearrange the current element and the child element
-      this.heap[index],
-        (this.heap[childIndex] = this.heap[childIndex]),
-        this.heap[index];
+      [this.heap[index], this.heap[childIndex]] = [
+        this.heap[childIndex],
+        this.heap[index],
+      ];
       index = childIndex;
     }
   }
@@ -78,4 +81,4 @@ class PriorityQueue {
   }
 }
 
-export { PriorityQueue };
+export default PriorityQueue;

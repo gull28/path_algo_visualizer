@@ -1,0 +1,7 @@
+#grid {
+    display: grid;
+}
+
+.cell {
+    background-color: aliceblue;
+}

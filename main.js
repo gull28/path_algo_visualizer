@@ -1,5 +1,5 @@
-import { PriorityQueue } from "./classes/PriorityQueue";
-
+import PriorityQueue from "./classes/PriorityQueue.js";
+import Grid from "./classes/Grid.js";
 // priority queue demo
 
 const pq = new PriorityQueue();
@@ -10,7 +10,39 @@ pq.enqueue("C", 1);
 pq.enqueue("D", 4);
 pq.enqueue("E", 5);
 
-pq.print();
+function generateGrid() {
+  // remove all children from grid
+  const gridDiv = document.getElementById("grid");
 
-console.log(pq.dequeue()); // C
-pq.print();
+  while (gridDiv.firstChild) {
+    gridDiv.removeChild(gridDiv.firstChild);
+  }
+
+  const gridColumns = document.getElementById("col_count").value;
+  const gridRows = document.getElementById("row_count").value;
+
+  const grid = new Grid(gridColumns, gridRows);
+  console.log(grid.get());
+
+  gridDiv.style.gridTemplateColumns = `repeat(${gridColumns}, 1fr)`;
+  gridDiv.style.gridTemplateRows = `repeat(${gridRows}, 1fr)`;
+
+  for (let i = 0; i < gridColumns; i++) {
+    for (let j = 0; j < gridRows; j++) {
+      const cell = document.createElement("div");
+      cell.classList.add("cell");
+      cell.textContent = `${i}, ${j}`;
+      gridDiv.appendChild(cell);
+    }
+  }
+}
+
+function func2() {
+  console.log("func2");
+}
+
+function func3() {
+  console.log("func3");
+}
+
+export { generateGrid, func2, func3 };
