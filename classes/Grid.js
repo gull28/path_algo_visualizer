@@ -21,15 +21,11 @@ class Grid {
     return this.cells;
   }
 
-  /**
-   *
-   * @param {*} x x-coordinate
-   * @param {*} y y-coordinate
-   * @param {*} value value from set: ["obstacle", "start", "end", "empty"]
-   */
   set(x, y, value = "empty") {
     this.cells[x + y * this.width] = value;
   }
+
+  removeCell(x, y) {}
 }
 
 export default Grid;

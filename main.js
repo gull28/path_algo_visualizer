@@ -11,7 +11,6 @@ pq.enqueue("D", 4);
 pq.enqueue("E", 5);
 
 function generateGrid() {
-  // remove all children from grid
   const gridDiv = document.getElementById("grid");
 
   while (gridDiv.firstChild) {
@@ -37,12 +36,7 @@ function generateGrid() {
   }
 }
 
-function func2() {
-  console.log("func2");
-}
+// to do - update cell value in grid
+function updateCell() {}
 
-function func3() {
-  console.log("func3");
-}
-
-export { generateGrid, func2, func3 };
+export { generateGrid, updateCell };
