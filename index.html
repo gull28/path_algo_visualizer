@@ -9,10 +9,6 @@
 
 </head>
 <body>
-    <div>
-        Hello world :D
-    </div>
-
     <input id="col_count" type="number">Input grid columns</input>
     <input id="row_count" type="number">Input grid rows</input>
 
@@ -20,13 +16,38 @@
 
     <div id="grid"></div>
 
-    <button id="zaza">Click me to log!</button>
+    <div id="cell-data">
+        <h2>Cell data</h2>
+        <div id="cell-coordinates"></div>
+        <form>
+            <label for="cell-type">Cell type:</label>
+            <select id="cell-type">
+                <option value="empty">Empty</option>
+                <option value="wall">Wall</option>
+                <option value="checkpoint">Checkpoint</option>
+                <option value="start">Start</option>
+                <option value="end">End</option>
+            </select>
+            <button type="button" id="save-cell">Save</button>
+        </form>
+    </div>
+
+
     <script type="module">
-        import { generateGrid } from "./main.js";
+        import { generateGrid, handleCellClick, updateCell } from "./main.js";
 
         document.getElementById("generate_grid").addEventListener("click", () => {
             generateGrid();
         });
+
+        document.getElementById("grid").addEventListener("click", (e) => {            
+            handleCellClick(e);            
+        });
+
+        document.getElementById("save-cell").addEventListener("click", () => {
+            updateCell();
+        });
+
 
     </script>
     

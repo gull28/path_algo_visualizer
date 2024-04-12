@@ -2,6 +2,10 @@ import Cell from "./Cell.js";
 // might have to make a cell class to store metadata about each cell (isPath, isVisited, etc)
 class Grid {
   constructor(width, height) {
+    if (Grid.instance) {
+      return Grid.instance;
+    }
+
     this.width = width;
     this.height = height;
 
@@ -15,6 +19,19 @@ class Grid {
         this.cells[i][j] = new Cell(i, j, "empty");
       }
     }
+
+    Grid.instance = this;
+  }
+
+  static getInstance() {
+    if (!Grid.instance) {
+      Grid.instance = new Grid(0, 0);
+    }
+    return Grid.instance;
+  }
+
+  static setInstance(width, height) {
+    Grid.instance = new Grid(width, height);
   }
 
   get() {
@@ -23,6 +40,28 @@ class Grid {
 
   set(x, y, value = "empty") {
     this.cells[x + y * this.width] = value;
+  }
+
+  validateNewCell(x, y, type) {
+    if (x < 0 || x >= this.width || y < 0 || y >= this.height) {
+      return false;
+    }
+
+    if (this.cells[x][y].get() === type) {
+      return false;
+    }
+
+    if (type === "start" || type === "end") {
+      for (let i = 0; i < this.width; i++) {
+        for (let j = 0; j < this.height; j++) {
+          if (this.cells[i][j].get() === type) {
+            return false;
+          }
+        }
+      }
+    }
+
+    return true;
   }
 
   removeCell(x, y) {}

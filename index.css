@@ -1,7 +1,42 @@
 #grid {
     display: grid;
+    grid-gap: 1rem;
+    max-width: max-content;
 }
 
 .cell {
-    background-color: aliceblue;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    background-color: yellow;
+    width: 5rem;
+    height: 5rem;
 }
+
+.empty {
+    background-color: gray;
+}
+
+.wall {
+    background-color: black;
+    color: white;
+}
+
+.start {
+    background-color: green;
+}
+
+.end {
+    background-color: red;
+}
+
+.checkpoint {
+    background-color: blue;
+}
+
+#cell-data {
+    display: none;
+}
+
+/* .cell */
