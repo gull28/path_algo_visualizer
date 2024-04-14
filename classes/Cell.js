@@ -1,3 +1,23 @@
+// Were you ever arrested?
+
+// Cells.
+
+// Did you spend much time in the cell?
+
+// Cells.
+
+// Have you ever been in an instituion?
+
+// Cells.
+
+// Do they keep you in a cell?
+
+// Cells.
+
+// When you're not performing your duties do they keep you in a little box?
+
+// Cells.
+
 class Cell {
   constructor(x, y, value = "empty") {
     this.x = x;

@@ -40,7 +40,10 @@
     background-color: blue;
 }
 
-#cell-data {
+
+#cell-data,
+#painter-form,
+#generate_dijkstra {
     display: none;
 }
 

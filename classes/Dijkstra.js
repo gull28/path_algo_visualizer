@@ -28,6 +28,10 @@ class Dijkstra {
     const queue = new PriorityQueue((a, b) => a.distance - b.distance);
     queue.enqueue(start, start.distance);
 
+    const checkpoints = this.grid
+      .flat()
+      .filter((cell) => cell.get() === "checkpoint");
+
     while (!queue.isEmpty()) {
       const current = queue.dequeue().value;
       current.isVisited = true;
@@ -61,7 +65,9 @@ class Dijkstra {
     if (y > 0) neighbors.push(this.grid[x][y - 1]);
     if (y < this.grid[0].length - 1) neighbors.push(this.grid[x][y + 1]);
 
-    return neighbors.filter((neighbor) => !neighbor.isVisited);
+    return neighbors.filter(
+      (neighbor) => !neighbor.isVisited && neighbor.get() !== "wall"
+    );
   }
 
   getPath(end) {

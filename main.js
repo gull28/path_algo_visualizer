@@ -17,6 +17,8 @@ function generateGrid() {
   gridDiv.style.gridTemplateColumns = `repeat(${gridColumns}, 1fr)`;
   gridDiv.style.gridTemplateRows = `repeat(${gridRows}, 1fr)`;
 
+  document.getElementById("painter-form").style.display = "block";
+
   for (let i = 0; i < gridColumns; i++) {
     for (let j = 0; j < gridRows; j++) {
       const cell = document.createElement("div");
@@ -70,7 +72,6 @@ function handleCellClick(e, painterMode, cellType) {
     const y = cell.getAttribute("data-y");
 
     if (painterMode) {
-      console.log("painter mode", x, y, cellType);
       grid.get()[x][y].set(cellType);
       generateGrid();
       return;
@@ -100,6 +101,15 @@ function updateCell() {
   const y = cellCoords.getAttribute("data-y");
 
   const gridSingleton = Grid.getInstance();
+
+  // check if start and end nodes are set, if they are, enable dijkstra button
+  const startNode = gridSingleton.getStartNode();
+  const endNode = gridSingleton.getEndNode();
+
+  if (startNode && endNode) {
+    console.log("start and end nodes are set");
+    document.getElementById("generate_dijkstra").disabled = false;
+  }
 
   if (gridSingleton.validateNewCell(x, y, cellType)) {
     const cell = gridSingleton.get()[x][y];

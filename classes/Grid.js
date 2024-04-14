@@ -88,6 +88,19 @@ class Grid {
     return null;
   }
 
+  getTypeCells(type) {
+    let cells = [];
+    for (let i = 0; i < this.width; i++) {
+      for (let j = 0; j < this.height; j++) {
+        if (this.cells[i][j].get() === type) {
+          cells.push(this.cells[i][j]);
+        }
+      }
+    }
+
+    return cells;
+  }
+
   removeCell(x, y) {}
 }
 
