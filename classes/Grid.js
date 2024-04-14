@@ -64,6 +64,30 @@ class Grid {
     return true;
   }
 
+  getStartNode() {
+    for (let i = 0; i < this.width; i++) {
+      for (let j = 0; j < this.height; j++) {
+        if (this.cells[i][j].get() === "start") {
+          return this.cells[i][j];
+        }
+      }
+    }
+
+    return null;
+  }
+
+  getEndNode() {
+    for (let i = 0; i < this.width; i++) {
+      for (let j = 0; j < this.height; j++) {
+        if (this.cells[i][j].get() === "end") {
+          return this.cells[i][j];
+        }
+      }
+    }
+
+    return null;
+  }
+
   removeCell(x, y) {}
 }
 
