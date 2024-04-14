@@ -16,6 +16,21 @@
 
     <div id="grid"></div>
 
+    <form>
+        <div>
+            <label for="show-coordinates">Painter mode</label>
+            <input type="checkbox" id="painter-mode">
+        </div>
+        <select id="painter-type">
+            <option value="empty">Empty</option>
+            <option value="wall">Wall</option>
+            <option value="checkpoint">Checkpoint</option>
+            <option value="start">Start</option>
+            <option value="end">End</option>
+        </select>
+        
+    </form>
+
     <div id="cell-data">
         <h2>Cell data</h2>
         <div id="cell-coordinates"></div>
@@ -32,21 +47,34 @@
         </form>
     </div>
 
+    <div>
+        <button id="generate_dijkstra">Generate Dijkstra</button>
+    </div>
+
 
     <script type="module">
-        import { generateGrid, handleCellClick, updateCell } from "./main.js";
+        import { generateGrid, handleCellClick, updateCell, generateDijkstra } from "./main.js";
 
         document.getElementById("generate_grid").addEventListener("click", () => {
             generateGrid();
         });
 
-        document.getElementById("grid").addEventListener("click", (e) => {            
-            handleCellClick(e);            
+        document.getElementById("grid").addEventListener("click", (e) => {     
+            const painterMode = document.getElementById("painter-mode").checked;
+            const cellType = document.getElementById("painter-type").value;
+
+            handleCellClick(e, painterMode, cellType);            
         });
 
         document.getElementById("save-cell").addEventListener("click", () => {
             updateCell();
         });
+
+        document.getElementById("generate_dijkstra").addEventListener("click", () => {
+            generateDijkstra();
+        });
+
+
 
 
     </script>

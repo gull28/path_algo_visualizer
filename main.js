@@ -1,5 +1,6 @@
 import PriorityQueue from "./classes/PriorityQueue.js";
 import Grid from "./classes/Grid.js";
+import Dijkstra from "./classes/Dijkstra.js";
 
 function generateGrid() {
   const gridDiv = document.getElementById("grid");
@@ -23,6 +24,10 @@ function generateGrid() {
       const cellType = grid.get()[i][j].get();
       cell.classList.add(cellType);
 
+      if (grid.get()[i][j].isPath) {
+        cell.classList.add("isPath");
+      }
+
       // append data
       cell.setAttribute("data-x", `${i}`);
       cell.setAttribute("data-y", `${j}`);
@@ -33,21 +38,50 @@ function generateGrid() {
   }
 }
 
-function handleCellClick(e) {
+function generateDijkstra() {
+  const grid = Grid.getInstance();
+  const start = grid.getStartNode();
+  const end = grid.getEndNode();
+
+  const startX = start.x;
+  const startY = start.y;
+  const endX = end.x;
+  const endY = end.y;
+
+  const dijkstra = new Dijkstra(grid.get(), startX, startY, endX, endY);
+  const path = dijkstra.generate();
+
+  for (let cell of path) {
+    grid.get()[cell.x][cell.y].markAsPath();
+  }
+
+  console.log(grid);
+
+  generateGrid();
+}
+
+function handleCellClick(e, painterMode, cellType) {
   const cell = e.target;
 
   if (cell.tagName === "DIV") {
-    const cellType = Grid.getInstance();
+    const grid = Grid.getInstance();
 
     const x = cell.getAttribute("data-x");
     const y = cell.getAttribute("data-y");
+
+    if (painterMode) {
+      console.log("painter mode", x, y, cellType);
+      grid.get()[x][y].set(cellType);
+      generateGrid();
+      return;
+    }
 
     // change display of cell data to block and show x and y
     document.getElementById("cell-data").style.display = "block";
     // set select value for cell type
     const cellTypeSelect = document.getElementById("cell-type");
 
-    const wantedCell = cellType.get()[x][y].get();
+    const wantedCell = grid.get()[x][y].get();
 
     cellTypeSelect.value = wantedCell;
 
@@ -78,4 +112,4 @@ function updateCell() {
   alert("Invalid cell type or cell already exists");
 }
 
-export { generateGrid, updateCell, handleCellClick };
+export { generateGrid, updateCell, handleCellClick, generateDijkstra };
