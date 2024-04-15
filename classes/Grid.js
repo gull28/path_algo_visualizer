@@ -30,6 +30,10 @@ class Grid {
     return Grid.instance;
   }
 
+  static resetInstance() {
+    Grid.instance = null;
+  }
+
   static setInstance(width, height) {
     Grid.instance = new Grid(width, height);
   }
@@ -72,7 +76,6 @@ class Grid {
         }
       }
     }
-
     return null;
   }
 
@@ -84,7 +87,6 @@ class Grid {
         }
       }
     }
-
     return null;
   }
 

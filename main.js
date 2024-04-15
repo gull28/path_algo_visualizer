@@ -57,8 +57,6 @@ function generateDijkstra() {
     grid.get()[cell.x][cell.y].markAsPath();
   }
 
-  console.log(grid);
-
   generateGrid();
 }
 
@@ -72,7 +70,24 @@ function handleCellClick(e, painterMode, cellType) {
     const y = cell.getAttribute("data-y");
 
     if (painterMode) {
-      grid.get()[x][y].set(cellType);
+      const gridSingleton = Grid.getInstance();
+
+      if (gridSingleton.validateNewCell(x, y, cellType)) {
+        const cell = gridSingleton.get()[x][y];
+        cell.set(cellType);
+      }
+
+      // check if start and end nodes are set, if they are, enable dijkstra button
+      const startNode = gridSingleton.getStartNode();
+      const endNode = gridSingleton.getEndNode();
+      console.log(startNode, endNode, "nodes", gridSingleton);
+
+      if (startNode && endNode) {
+        console.log("start and end nodes are set");
+        document.getElementById("generate_dijkstra").style.display = "block";
+        document.getElementById("generate_dijkstra").disabled = false;
+      }
+
       generateGrid();
       return;
     }
@@ -108,6 +123,7 @@ function updateCell() {
 
   if (startNode && endNode) {
     console.log("start and end nodes are set");
+    document.getElementById("generate_dijkstra").style.display = "block";
     document.getElementById("generate_dijkstra").disabled = false;
   }
 

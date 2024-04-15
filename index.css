@@ -33,13 +33,12 @@
 }
 
 .isPath {
-    background-color: purple !important;
+    background-color: purple;
 }
 
 .checkpoint {
     background-color: blue;
 }
-
 
 #cell-data,
 #painter-form,
