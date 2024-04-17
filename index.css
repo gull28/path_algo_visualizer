@@ -1,7 +1,21 @@
+body{
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
 #grid {
     display: grid;
-    grid-gap: 1rem;
+    grid-gap: 0.7rem;
     max-width: max-content;
+    margin-bottom: 5rem;
+}
+
+.inputs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* test */
@@ -10,9 +24,31 @@
     flex: 1;
     justify-content: center;
     align-items: center;
-    background-color: yellow;
-    width: 5rem;
-    height: 5rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 5px;
+}
+
+.painter-container{
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.cell:hover {
+    opacity: 0.75;
+    transition: 0.5s;
 }
 
 .empty {
@@ -36,9 +72,6 @@
     background-color: purple;
 }
 
-.checkpoint {
-    background-color: blue;
-}
 
 #cell-data,
 #painter-form,
@@ -47,3 +80,21 @@
 }
 
 /* .cell */
+
+button {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    border: 2px solid gray
+}
+
+input[type="number"] {
+    width: 4rem;
+    margin: 0.5rem;
+}
+
+label{
+    margin: 0.5rem;
+}

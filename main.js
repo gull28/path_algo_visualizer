@@ -17,7 +17,10 @@ function generateGrid() {
   gridDiv.style.gridTemplateColumns = `repeat(${gridColumns}, 1fr)`;
   gridDiv.style.gridTemplateRows = `repeat(${gridRows}, 1fr)`;
 
-  document.getElementById("painter-form").style.display = "block";
+  document.getElementById("painter-form").style.display = "flex";
+
+  // get total cell count
+  const totalCells = gridColumns * gridRows;
 
   for (let i = 0; i < gridColumns; i++) {
     for (let j = 0; j < gridRows; j++) {
@@ -34,10 +37,21 @@ function generateGrid() {
       cell.setAttribute("data-x", `${i}`);
       cell.setAttribute("data-y", `${j}`);
 
-      cell.textContent = `${i}, ${j}`;
+      // set rem based on total cells
       gridDiv.appendChild(cell);
     }
   }
+}  
+
+function setCell(x, y, cellType) {
+  const grid = Grid.getInstance();
+  const cell = grid.get()[x][y];
+  cell.set(cellType);
+
+  const gridDiv = document.getElementById("grid");
+  const cellDiv = gridDiv.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+
+  cellDiv.classList.add(cellType);
 }
 
 function generateDijkstra() {
@@ -53,12 +67,18 @@ function generateDijkstra() {
   const dijkstra = new Dijkstra(grid.get(), startX, startY, endX, endY);
   const path = dijkstra.generate();
 
-  for (let cell of path) {
-    grid.get()[cell.x][cell.y].markAsPath();
+  for (let i = 0; i < path.length; i++) {
+    const cell = path[i];
+    delay(cell, i * 250, "isPath");
   }
-
-  generateGrid();
 }
+
+function delay(cell, delayTime, cellType) {
+  setTimeout(() => {
+    setCell(cell.x, cell.y, cellType);
+  }, delayTime);
+}
+
 
 function handleCellClick(e, painterMode, cellType) {
   const cell = e.target;
@@ -69,21 +89,22 @@ function handleCellClick(e, painterMode, cellType) {
     const x = cell.getAttribute("data-x");
     const y = cell.getAttribute("data-y");
 
+    console.log(x, y)
     if (painterMode) {
       const gridSingleton = Grid.getInstance();
 
+      console.log(gridSingleton.validateNewCell(x, y, cellType))
       if (gridSingleton.validateNewCell(x, y, cellType)) {
         const cell = gridSingleton.get()[x][y];
+        console.log(cellType, cell)
         cell.set(cellType);
       }
 
       // check if start and end nodes are set, if they are, enable dijkstra button
       const startNode = gridSingleton.getStartNode();
       const endNode = gridSingleton.getEndNode();
-      console.log(startNode, endNode, "nodes", gridSingleton);
 
       if (startNode && endNode) {
-        console.log("start and end nodes are set");
         document.getElementById("generate_dijkstra").style.display = "block";
         document.getElementById("generate_dijkstra").disabled = false;
       }
@@ -122,7 +143,6 @@ function updateCell() {
   const endNode = gridSingleton.getEndNode();
 
   if (startNode && endNode) {
-    console.log("start and end nodes are set");
     document.getElementById("generate_dijkstra").style.display = "block";
     document.getElementById("generate_dijkstra").disabled = false;
   }

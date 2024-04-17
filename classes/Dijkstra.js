@@ -28,10 +28,6 @@ class Dijkstra {
     const queue = new PriorityQueue((a, b) => a.distance - b.distance);
     queue.enqueue(start, start.distance);
 
-    const checkpoints = this.grid
-      .flat()
-      .filter((cell) => cell.get() === "checkpoint");
-
     while (!queue.isEmpty()) {
       const current = queue.dequeue().value;
       current.isVisited = true;
@@ -43,7 +39,7 @@ class Dijkstra {
       const neighbors = this.getNeighbors(current);
 
       for (let neighbor of neighbors) {
-        const distance = current.distance + 1; // Adjust this if your grid has weighted edges
+        const distance = current.distance + 1;
 
         if (distance < neighbor.distance) {
           neighbor.distance = distance;

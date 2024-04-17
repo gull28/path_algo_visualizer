@@ -1,59 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
     <title>Document</title>
-
-
 </head>
+
 <body>
-    <input id="col_count" type="number">Input grid columns</input>
-    <input id="row_count" type="number">Input grid rows</input>
+    <div class="container">
+        <div class="inputs">
+            <label>Input grid columns</label>
+            <input id="col_count" type="number" min="1" />
+            <label>Input grid rows</label>
+            <input id="row_count" type="number" min="1"/>
 
-    <button id="generate_grid">Generate grid</button>
-
-    <div id="grid"></div>
-
-    <form id="painter-form">
-        <div>
-            <label for="show-coordinates">Painter mode</label>
-            <input type="checkbox" id="painter-mode">
+            <button id="generate_grid">Generate grid</button>
         </div>
-        <select id="painter-type">
-            <option value="empty">Empty</option>
-            <option value="wall">Wall</option>
-            <option value="checkpoint">Checkpoint</option>
-            <option value="start">Start</option>
-            <option value="end">End</option>
-        </select>
-        
-    </form>
+        <div class="painter-container">
+            <form id="painter-form">
+                <div>
+                    <label for="show-coordinates">Painter mode</label>
+                    <input type="checkbox" id="painter-mode">
+                </div>
+                <select id="painter-type">
+                    <option value="empty">Empty</option>
+                    <option value="wall">Wall</option>
+                    <option value="start">Start</option>
+                    <option value="end">End</option>
+                </select>
 
-    <div id="cell-data">
-        <h2>Cell data</h2>
-        <div id="cell-coordinates"></div>
-        <form>
-            <label for="cell-type">Cell type:</label>
-            <select id="cell-type">
-                <option value="empty">Empty</option>
-                <option value="wall">Wall</option>
-                <option value="checkpoint">Checkpoint</option>
-                <option value="start">Start</option>
-                <option value="end">End</option>
-            </select>
-            <button type="button" id="save-cell">Save</button>
-        </form>
+            </form>
+        </div>
+        <div>
+            <button id="generate_dijkstra">Generate Dijkstra</button>
+        </div>
+        <div id="grid"></div>
+
+        <div id="cell-data">
+            <h2>Cell data</h2>
+            <div id="cell-coordinates"></div>
+            <form>
+                <label for="cell-type">Cell type:</label>
+                <select id="cell-type">
+                    <option value="empty">Empty</option>
+                    <option value="wall">Wall</option>
+                    <option value="start">Start</option>
+                    <option value="end">End</option>
+                </select>
+                <button type="button" id="save-cell">Save</button>
+            </form>
+        </div>
+
     </div>
-
-    <div>
-        <button id="generate_dijkstra">Generate Dijkstra</button>
-    </div>
-
 
     <script type="module">
-        import { generateGrid, handleCellClick, updateCell, generateDijkstra } from "./main.js";
+        import {
+            generateGrid,
+            handleCellClick,
+            updateCell,
+            generateDijkstra
+        } from "./main.js";
         import Grid from "./classes/Grid.js";
 
         document.getElementById("generate_grid").addEventListener("click", () => {
@@ -61,11 +69,12 @@
             generateGrid();
         });
 
-        document.getElementById("grid").addEventListener("click", (e) => {     
+        document.getElementById("grid").addEventListener("click", (e) => {
             const painterMode = document.getElementById("painter-mode").checked;
             const cellType = document.getElementById("painter-type").value;
 
-            handleCellClick(e, painterMode, cellType);            
+            console.log(e)
+            handleCellClick(e, painterMode, cellType);
         });
 
         document.getElementById("save-cell").addEventListener("click", () => {
@@ -75,12 +84,8 @@
         document.getElementById("generate_dijkstra").addEventListener("click", () => {
             generateDijkstra();
         });
-
-
-
-
     </script>
-    
+
 </body>
 
 </html>
