@@ -1,4 +1,4 @@
-import Cell from "./Cell.js";
+import Cell from "./DijkstraCell.js";
 // might have to make a cell class to store metadata about each cell (isPath, isVisited, etc)
 class Grid {
   constructor(width, height) {
