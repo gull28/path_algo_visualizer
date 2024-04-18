@@ -1,5 +1,6 @@
 import Cell from "./DijkstraCell.js";
-// might have to make a cell class to store metadata about each cell (isPath, isVisited, etc)
+import Dijkstra from "./Dijkstra.js";
+
 class Grid {
   constructor(width, height) {
     if (Grid.instance) {
@@ -51,27 +52,27 @@ class Grid {
     y = parseInt(y);
 
     if (x < 0 || x > this.width || y < 0 || y > this.height) {
-        console.log(x, y, this.width, this.height);
-        console.log("out of bounds");
-        return false;
+      console.log(x, y, this.width, this.height);
+      console.log("out of bounds");
+      return false;
     }
 
     if (this.cells[x][y].get() === type) {
-        return false;
+      return false;
     }
 
     if (type === "start" || type === "end") {
-        for (let i = 0; i < this.width; i++) {
-            for (let j = 0; j < this.height; j++) {
-                if (this.cells[i][j].get() === type) {
-                    return false;
-                }
-            }
+      for (let i = 0; i < this.width; i++) {
+        for (let j = 0; j < this.height; j++) {
+          if (this.cells[i][j].get() === type) {
+            return false;
+          }
         }
+      }
     }
 
     return true;
-}
+  }
 
   getStartNode() {
     for (let i = 0; i < this.width; i++) {

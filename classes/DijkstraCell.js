@@ -22,13 +22,7 @@ import Cell from "./Cell.js";
 
 class DijkstraCell extends Cell {
   constructor(x, y, value = "empty") {
-    this.x = x;
-    this.y = y;
-    this.value = value;
-    this.isPath = false;
-    this.isVisited = false;
-    this.distance = Infinity;
-    this.previous = null;
+    super(x, y, value);
   }
 
   set(value) {

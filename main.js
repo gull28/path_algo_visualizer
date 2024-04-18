@@ -41,7 +41,7 @@ function generateGrid() {
       gridDiv.appendChild(cell);
     }
   }
-}  
+}
 
 function setCell(x, y, cellType) {
   const grid = Grid.getInstance();
@@ -79,7 +79,6 @@ function delay(cell, delayTime, cellType) {
   }, delayTime);
 }
 
-
 function handleCellClick(e, painterMode, cellType) {
   const cell = e.target;
 
@@ -89,14 +88,14 @@ function handleCellClick(e, painterMode, cellType) {
     const x = cell.getAttribute("data-x");
     const y = cell.getAttribute("data-y");
 
-    console.log(x, y)
+    console.log(x, y);
     if (painterMode) {
       const gridSingleton = Grid.getInstance();
 
-      console.log(gridSingleton.validateNewCell(x, y, cellType))
+      console.log(gridSingleton.validateNewCell(x, y, cellType));
       if (gridSingleton.validateNewCell(x, y, cellType)) {
         const cell = gridSingleton.get()[x][y];
-        console.log(cellType, cell)
+        console.log(cellType, cell);
         cell.set(cellType);
       }
 

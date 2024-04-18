@@ -52,6 +52,12 @@ class Dijkstra {
     return this.getPath(end);
   }
 
+  // sort of a hacky way to get the distance - but hey, it works :)
+  getDistance() {
+    const path = this.generate();
+    return path.length;
+  }
+
   getNeighbors(cell) {
     const neighbors = [];
     const { x, y } = cell;
