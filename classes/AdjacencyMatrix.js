@@ -1,14 +1,15 @@
 import Dijkstra from "./Dijkstra.js";
-
+import Grid from "./Grid.js";
 // think of a way to make this work with the grid
 // this is by no means efficient, but taking walls into account, this is the best way to do it as of now
 class AdjacencyMatrix {
-  constructor(grid) {
-    this.grid = grid;
+  constructor() {
     this.matrix = [];
   }
 
   generateMatrix(checkpoints) {
+    const grid = Grid.getInstance();
+
     for (let i = 0; i < checkpoints.length; i++) {
       this.addVertex();
     }
@@ -17,7 +18,7 @@ class AdjacencyMatrix {
       for (let j = 0; j < checkpoints.length; j++) {
         if (i !== j) {
           const distance = new Dijkstra(
-            this.grid,
+            grid.get(),
             checkpoints[i].x,
             checkpoints[i].y,
             checkpoints[j].x,
@@ -52,3 +53,5 @@ class AdjacencyMatrix {
     return this.matrix;
   }
 }
+
+export default AdjacencyMatrix;

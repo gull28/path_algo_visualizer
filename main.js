@@ -1,6 +1,7 @@
 import PriorityQueue from "./classes/PriorityQueue.js";
 import Grid from "./classes/Grid.js";
 import Dijkstra from "./classes/Dijkstra.js";
+import AdjacencyMatrix from "./classes/AdjacencyMatrix.js";
 
 function generateGrid() {
   const gridDiv = document.getElementById("grid");
@@ -41,6 +42,10 @@ function generateGrid() {
       gridDiv.appendChild(cell);
     }
   }
+}
+
+function generateAdjacencyMatrix() {
+  const adjacencyMatrix = new AdjacencyMatrix();
 }
 
 function setCell(x, y, cellType) {
@@ -88,7 +93,6 @@ function handleCellClick(e, painterMode, cellType) {
     const x = cell.getAttribute("data-x");
     const y = cell.getAttribute("data-y");
 
-    console.log(x, y);
     if (painterMode) {
       const gridSingleton = Grid.getInstance();
 
@@ -128,6 +132,40 @@ function handleCellClick(e, painterMode, cellType) {
   }
 }
 
+function changeMode(mode) {
+  switch (mode) {
+    case "tsp":
+      // reset painter-type to empty
+      document.getElementById("cell-type").value = "empty";
+      const elements = document.querySelectorAll(".tsp-option");
+      elements.forEach((element) => {
+        element.style.display = "block";
+      });
+
+      const endElements = document.querySelectorAll(".end-option");
+      endElements.forEach((element) => {
+        element.style.display = "none";
+      });
+      break;
+    default:
+      // reset painter-type to empty
+      document.getElementById("cell-type").value = "empty";
+      const elems = document.querySelectorAll(".tsp-option");
+      elems.forEach((element) => {
+        element.style.display = "none";
+      });
+
+      const endElems = document.querySelectorAll(".end-option");
+      endElems.forEach((element) => {
+        element.style.display = "block";
+      });
+      break;
+  }
+
+  Grid.resetInstance();
+  generateGrid();
+}
+
 // to do - update cell value in grid
 function updateCell() {
   const cellType = document.getElementById("cell-type").value;
@@ -157,4 +195,10 @@ function updateCell() {
   alert("Invalid cell type or cell already exists");
 }
 
-export { generateGrid, updateCell, handleCellClick, generateDijkstra };
+export {
+  generateGrid,
+  updateCell,
+  handleCellClick,
+  generateDijkstra,
+  changeMode,
+};

@@ -18,6 +18,12 @@
 
             <button id="generate_grid">Generate grid</button>
         </div>
+        <div>
+            <select id="mode">
+                <option value="dijkstra">Dijkstra</option>
+                <option value="tsp">Traveling salesman problem</option>
+            </select>
+        </div>
         <div class="painter-container">
             <form id="painter-form">
                 <div>
@@ -28,7 +34,8 @@
                     <option value="empty">Empty</option>
                     <option value="wall">Wall</option>
                     <option value="start">Start</option>
-                    <option value="end">End</option>
+                    <option class="end-option" value="end">End</option>
+                    <option class="tsp-option" value="checkpoint">checkpoint</option>
                 </select>
 
             </form>
@@ -47,7 +54,8 @@
                     <option value="empty">Empty</option>
                     <option value="wall">Wall</option>
                     <option value="start">Start</option>
-                    <option value="end">End</option>
+                    <option class="end-option" value="end">End</option>
+                    <option class="tsp-option" value="checkpoint">checkpoint</option>
                 </select>
                 <button type="button" id="save-cell">Save</button>
             </form>
@@ -60,13 +68,18 @@
             generateGrid,
             handleCellClick,
             updateCell,
-            generateDijkstra
+            generateDijkstra,
+            changeMode
         } from "./main.js";
         import Grid from "./classes/Grid.js";
 
         document.getElementById("generate_grid").addEventListener("click", () => {
             Grid.resetInstance();
             generateGrid();
+        });
+
+        document.getElementById("mode").addEventListener("change", (e) => {
+            changeMode(e.target.value);
         });
 
         document.getElementById("grid").addEventListener("click", (e) => {

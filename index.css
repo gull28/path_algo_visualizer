@@ -98,3 +98,10 @@ input[type="number"] {
 label{
     margin: 0.5rem;
 }
+
+.tsp-option{
+    display: none;
+}
+
+
+
