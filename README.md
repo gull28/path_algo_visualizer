@@ -5,3 +5,7 @@ Welcome to the Path Finding Algorithm Visualizer! This project is a refreshing b
 ## Overview
 
 This visualizer allows you to explore pathfinding algorithms in action, providing an interactive and engaging experience.
+
+You can check it out on the web:
+
+https://path.krisjanis.dev
