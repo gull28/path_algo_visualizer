@@ -8,17 +8,28 @@
     <title>Document</title>
 </head>
 
-<body>
+<body class="dark-mode">
     <div class="container">
+        <div class="float-right">
+            <label>Dark mode</label>
+            <label class="switch">
+                <input id="dark-mode" checked type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
         <div class="inputs">
-            <label>Input grid columns</label>
-            <input id="col_count" type="number" min="1" />
-            <label>Input grid rows</label>
-            <input id="row_count" type="number" min="1"/>
+            <div class="input-container">
+                <label>Input grid columns</label>
+                <input id="col_count" type="number" min="1" />
+            </div>
+            <div class="input-container">
+                <label>Input grid rows</label>
+                <input id="row_count" type="number" min="1" />
+            </div>
 
             <button id="generate_grid">Generate grid</button>
         </div>
-        <div>
+        <div class="selector">
             <select id="mode">
                 <option value="dijkstra">Dijkstra</option>
                 <option value="tsp">Traveling salesman problem</option>
@@ -72,6 +83,10 @@
             changeMode
         } from "./main.js";
         import Grid from "./classes/Grid.js";
+
+        document.getElementById("dark-mode").addEventListener("change", (e) => {
+            document.body.classList.toggle("dark-mode", e.target.checked);
+        });
 
         document.getElementById("generate_grid").addEventListener("click", () => {
             Grid.resetInstance();

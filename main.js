@@ -90,16 +90,16 @@ function handleCellClick(e, painterMode, cellType) {
   if (cell.tagName === "DIV") {
     const grid = Grid.getInstance();
 
+    // clear grid from path
+
     const x = cell.getAttribute("data-x");
     const y = cell.getAttribute("data-y");
 
     if (painterMode) {
       const gridSingleton = Grid.getInstance();
 
-      console.log(gridSingleton.validateNewCell(x, y, cellType));
       if (gridSingleton.validateNewCell(x, y, cellType)) {
         const cell = gridSingleton.get()[x][y];
-        console.log(cellType, cell);
         cell.set(cellType);
       }
 
@@ -111,6 +111,8 @@ function handleCellClick(e, painterMode, cellType) {
         document.getElementById("generate_dijkstra").style.display = "block";
         document.getElementById("generate_dijkstra").disabled = false;
       }
+
+      grid.removePath();
 
       generateGrid();
       return;

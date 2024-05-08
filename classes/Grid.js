@@ -70,7 +70,6 @@ class Grid {
         }
       }
     }
-
     return true;
   }
 
@@ -83,6 +82,18 @@ class Grid {
       }
     }
     return null;
+  }
+
+  removePath() {
+    for (let i = 0; i < this.width; i++) {
+      for (let j = 0; j < this.height; j++) {
+        if (this.cells[i][j].get() === "isPath") {
+          this.cells[i][j].set("empty");
+          this.cells[i][j].setDistance(Infinity);
+          this.cells[i][j].setPrevious(null);
+        }
+      }
+    }
   }
 
   getEndNode() {
